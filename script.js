@@ -37,6 +37,13 @@ function render() {
     groceryListEl.innerHTML = '';
     const filteredGroceries = getFilteredGroceries();
 
+    // Show or hide the empty state
+    if (groceries.length === 0) {
+        emptyStateEl.style.display = 'block';
+    } else {
+        emptyStateEl.style.display = 'none';
+    }
+
     filteredGroceries.forEach( item => {
         const li = document.createElement('li');
         li.classList.add('grocery-item');
@@ -96,8 +103,4 @@ groceryFormEl.addEventListener('submit', (e) => {
 
 
 // Initial render
-if (groceries.length) {
-    render();
-} else {
-    emptyStateEl.style.display = 'block'
-}
+render();
