@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Grocery</title>
+</head>
+<body>
+    <div class="container">
+        <h1>My Grocery List</h1>
+
+        <form class="grocery-form">
+            <input type="text" class="grocery-input" placeholder="Add a new task..." id="groceryInput">
+            <button type="submit" class="add-btn">Add</button>
+        </form>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="active">Active</button>
+            <button class="filter-btn" data-filter="completed">Completed</button>
+        </div>
+
+        <ul class="grocery-list" id="groceryList">
+        </ul>
+
+        <!-- Empty state (will be shown when no grocerys) -->
+        <div class="empty-state" style="display: none;">
+            <p>Your Grocery list is empty. Add a new Papaya </p>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
