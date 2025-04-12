@@ -44,7 +44,7 @@ h1 {
 
 .grocery-input {
     flex: 1;
-    padding: 12px;
+    padding: 12px 1px;
     border: 2px solid #ddd;
     border-radius: var(--border-radius);
     font-size: 16px;
