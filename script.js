@@ -1,9 +1,9 @@
 'use strict';
 
-let filter = 'all';
-let groceries = [
+import Db from './db.js';
+const db = new Db();
 
-];
+let filter = 'all';
 
 const groceryFormEl = document.querySelector('.grocery-form');
 const groceryInputEl = document.getElementById('groceryInput');
@@ -25,11 +25,11 @@ filterBtnEls.forEach( btn => {
 function getFilteredGroceries() {
     switch (filter) {
         case 'active':
-            return groceries.filter( item => !item.completed);
+            return db.getGroceries().filter( item => !item.completed);
         case 'completed':
-            return groceries.filter( item => item.completed);
+            return db.getGroceries().filter( item => item.completed);
         default:
-            return groceries;
+            return db.getGroceries();
     }
 }
 
@@ -38,7 +38,7 @@ function render() {
     const filteredGroceries = getFilteredGroceries();
 
     // Show or hide the empty state
-    if (groceries.length === 0) {
+    if (db.getGroceries().length === 0) {
         emptyStateEl.style.display = 'block';
     } else {
         emptyStateEl.style.display = 'none';
@@ -70,15 +70,12 @@ function render() {
 }
 
 function toggleComplete(id) {
-    const item = groceries.find( item => item.id === id);
-    if (item) {
-        item.completed = !item.completed;
-        render();
-    }
+    db.toggleCompleted(id);
+    render();
 }
 
 function deleteGrocery(id) {
-    groceries = groceries.filter( item => item.id !== id);
+    db.deleteGrocery(id);
     render();
 }
 
@@ -88,7 +85,7 @@ groceryFormEl.addEventListener('submit', (e) => {
 
     const input = groceryInputEl.value.trim();
     if (input) {
-        groceries.push({
+        db.addGrocery({
             id: Date.now(),
             grocery: input,
             completed: false
